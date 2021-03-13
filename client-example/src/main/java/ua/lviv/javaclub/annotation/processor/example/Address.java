@@ -1,5 +1,8 @@
 package ua.lviv.javaclub.annotation.processor.example;
 
+import ua.lviv.javaclub.annotation.processor.CoffeeJugMagic;
+
+@CoffeeJugMagic
 public class Address {
   private String city;
   private String street;

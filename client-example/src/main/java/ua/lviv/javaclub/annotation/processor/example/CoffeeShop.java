@@ -1,5 +1,8 @@
 package ua.lviv.javaclub.annotation.processor.example;
 
+import ua.lviv.javaclub.annotation.processor.CoffeeJugMagic;
+
+@CoffeeJugMagic
 public class CoffeeShop {
   private String name;
   private Integer capacity;

@@ -22,7 +22,7 @@ Additional compiler options
 
 ## Related Resources
 * http://hannesdorfmann.com/annotation-processing/annotationprocessing101
+* https://openjdk.java.net/groups/compiler/doc/compilation-overview/index.html
 * https://github.com/square/javapoet
 * https://www.baeldung.com/java-annotation-processing-builder
-* https://openjdk.java.net/groups/compiler/doc/compilation-overview/index.html
-
+* https://github.com/gunnarmorling/awesome-annotation-processing

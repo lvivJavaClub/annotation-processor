@@ -1,0 +1,1 @@
+package ua.lviv.javaclub.annotation.processor;

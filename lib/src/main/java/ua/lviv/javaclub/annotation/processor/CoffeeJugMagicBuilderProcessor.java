@@ -4,6 +4,8 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 import com.google.auto.service.AutoService;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Set;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Processor;
@@ -11,6 +13,7 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
+import javax.tools.JavaFileObject;
 
 @AutoService(Processor.class)
 public class CoffeeJugMagicBuilderProcessor extends AbstractProcessor {
@@ -27,6 +30,7 @@ public class CoffeeJugMagicBuilderProcessor extends AbstractProcessor {
   }
 
   private void processAnnotatedClass(Element element) {
+    System.out.printf("Processing %s annotated class%n", element.getSimpleName().toString());
     var builderClassCodeTemplate = """
         package %1$s;
                 
@@ -63,7 +67,19 @@ public class CoffeeJugMagicBuilderProcessor extends AbstractProcessor {
     var builderClassCode = builderClassCodeTemplate
         .formatted(annotatedClassPackage, builderClassName, annotatedClassName, fieldsAndSetters, constructorArguments);
 
-    System.out.println(builderClassCode);
+    // Write to a file:
+    try {
+      var  fullyQualifiedBuilderClassName = annotatedClassPackage + "." + builderClassName;
+      JavaFileObject builderFile = processingEnv.getFiler()
+          .createSourceFile(fullyQualifiedBuilderClassName, element.getEnclosingElement());
+
+      try (PrintWriter out = new PrintWriter(builderFile.openWriter())) {
+        out.print(builderClassCode);
+      }
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   private String generateFieldAndSetter(String builderClassName, Element f) {

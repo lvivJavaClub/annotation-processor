@@ -26,7 +26,7 @@ public class CoffeeJugMagicBuilderProcessor extends AbstractProcessor {
       annotatedElements.forEach(this::processAnnotatedClass);
     }
     System.out.printf("------------------------------------ %s finished%n", this.getClass().getName());
-    return true;
+    return false;
   }
 
   private void processAnnotatedClass(Element element) {

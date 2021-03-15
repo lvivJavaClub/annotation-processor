@@ -13,12 +13,17 @@ javac -classpath lib/target/annotations-processor-lib-1.0-SNAPSHOT.jar\
  client-example/src/main/java/ua/lviv/javaclub/annotation/processor/example/Address.java
  ```
 
-Additional compiler options
+Additional compiler options:
 ```shell
 -XprintProcessorInfo - Print information about which annotations a processor is asked to process.
 -XprintRounds - Print information about initial and subsequent annotation processing rounds.
 ```
 
+Run Client from CLI (cd to project root):
+```shell
+java -cp lib/target/annotations-processor-lib-1.0-SNAPSHOT.jar:client-example/target/annotations-processor-client-example-1.0-SNAPSHOT.jar\
+ ua.lviv.javaclub.annotation.processor.example.Main
+```
 
 ## Related Resources
 * http://hannesdorfmann.com/annotation-processing/annotationprocessing101
